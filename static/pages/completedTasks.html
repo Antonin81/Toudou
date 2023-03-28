@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Toudou</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+  <script src="/assets/scripts/categoryTree.js"></script>
+  <script src="/assets/scripts/completedTasks.js"></script>
+  <header class="flex">
+    <div>
+      <h1>Toudou</h1>
+    </div>
+    <nav>
+      <ul class="flex">
+        <li>
+          <a href="/">
+            <div >
+              <p>Accueil</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/addTasks">
+            <div>
+              <p>Modifications</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/completedTasks">
+            <div>
+              <p>
+                Remplies
+              </p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div id="list" class="mainList"></div>
+  </main>
+  <div id="notificationCategoryDeletion" class="notificationCategoryDeletion">
+    <div>
+      <p>Êtes-vous sûr de vouloir supprimer cette catégorie ? Elle pourrait contenir quelques tâches encore...</p>
+      <div>
+        <button onclick="definitiveSupCategory()">Oui</button>
+        <button onclick="closeNotification()">Non</button>
+      </div> 
+    </div>
+  </div>
+</body>
+</html>

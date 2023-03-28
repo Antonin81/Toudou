@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Toudou</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+  <script src="/assets/scripts/addTasks.js"></script>
+  <header class="flex">
+    <div>
+      <h1>Toudou</h1>
+    </div>
+    <nav>
+      <ul class="flex">
+        <li>
+          <a href="/">
+            <div >
+              <p>Accueil</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/addTasks">
+            <div>
+              <p>Modifications</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/completedTasks">
+            <div>
+              <p>
+                Remplies
+              </p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    
+    <div class="form form--addTask">
+      <h2>Ajouter une tâche</h2>
+      <fieldset class="flex">
+        <div class="flex">
+          <div class="formPart formPart--left flex">
+            <div class="flex">
+              <label class="form__label" for="title" data-labelRequired="true">Intitulé : * </label>
+              <input class="form__input" type="text" name="title" id="titleInput" data-inputRequired="true">
+            </div>
+            <div class="flex">
+              <label class="form__label" for="end_date">Date limite : </label>
+              <input class="form__input" type="date" name="end_date" id="end_dateInput">
+            </div>
+            <div class="flex">
+              <label class="form__label" for="parentTask">Sélectionnez la catégorie de votre tâche : </label>
+              <select class="form__input" name="parentTask" id="parentTaskInput" ></select>
+            </div>
+          </div>
+          <div class="formPart flex formPart--right">
+            <label class="form__label" for="description">Description : </label>
+            <textarea name="description" id="descriptionInput" cols="30" rows="10"></textarea>
+          </div>
+        </div>
+        <div class="flex durationPart">
+          <p class="form__label">Durée estimée : </p>
+          <div class="flex">
+            <input class="form__input" type="number" name="days" id="daysInput">
+            <label for="days">jours</label>
+            <input class="form__input" type="number" name="hours" id="hoursInput">
+            <label for="hours">heures</label>
+            <input class="form__input" type="number" name="minutes" id="minutesInput">
+            <label for="minutes">minutes</label>
+          </div>
+          
+        </div>
+        <button onclick="valid()">Valider</button>
+      </fieldset>
+    </div>
+    <div class="form form--addCategory">
+      <h2>Ajouter une catégorie</h2>
+      <fieldset class="flex">
+        <div class="flex">
+          <div class="flex">
+            <label class="form__label" for="nameCategory" data-labelRequired="true">Nom : * </label>
+            <input class="form__input" type="text" name="nameCategory" id="nameCategoryInput" data-inputRequired="true">
+          </div>
+          <div class="flex">
+            <label class="form__label" for="parentCategory" >Catégorie parente : </label>
+            <select class="form__input" name="parentCategory" id="parentCategoryInput"></select>
+          </div>
+        </div>
+        <button onclick="validCategory()">Valider</button>
+      </fieldset>
+    </div>
+    <div class="form form--changeCategory">
+      <h2>Changer le nom d'une catégorie</h2>
+      <fieldset class="flex">
+        <div class="flex">
+          <div class="flex">
+            <label class="form__label" for="categoryNameToChange" >Catégorie à changer : </label>
+            <select class="form__input" name="categoryNameToChange" id="categoryNameToChangeInput"></select>
+          </div>
+          <div class="flex">
+            <label class="form__label" for="changeNameCategory" data-labelRequired="true">Nouveau nom : * </label>
+            <input class="form__input" type="text" name="changeNameCategory" id="changeNameCategoryInput" data-inputRequired="true">
+          </div>
+        </div>
+        <button onclick="validCategoryChange()">Valider</button>
+      </fieldset>
+    </div>
+  </main>
+  <div id="validationNotificationTask" class="notification--validation notification" data-active=false><p>Votre ajout de tâche a été effectué.</p></div>
+  <div id="validationNotificationCategory" class="notification--validation notification" data-active=false><p>Votre ajout de catégorie a été effectué.</p></div>
+  <div id="rejectionNotification" class="notification--rejection notification" data-active=false><p>Les champs requis sont incomplets.</p></div>
+  <div id="categoryNameModificationNotification" class="notification--validation notification" data-active=false><p>Le nom de cette catégorie a changé.</p></div>
+</body>
+</html>
